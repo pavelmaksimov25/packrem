@@ -1,0 +1,62 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'product-quick-add-form',
+} %}
+
+{% define data = {
+    title: '',
+    form: required,
+    options: required,
+    submitButtonTitle: '',
+    verticalLayout: false,
+} %}
+
+{% block body %}
+    {% block title %}
+        {% if data.title %}
+            <strong class="{{ config.name }}__title title title--h5 col col--sm-12 {{ not data.verticalLayout ? 'col--md-2 ' ~ config.name ~ '__title--row' }}">
+                {{ data.title }}
+            </strong>
+        {% endif %}
+    {% endblock %}
+
+    {% block productQuickAddForm %}
+        {% set fieldsAlignment = not data.verticalLayout ? 'col--md-10' %}
+
+        <div class="col col--sm-12 {{ fieldsAlignment }}">
+            {{ form_start(data.form, data.options) }}
+                <div class="grid">
+                    {% block fields %}
+                        {% include molecule('product-quick-add-fields', 'ProductSearchWidget') with {
+                            class: 'grid col col--sm-12 ' ~ fieldsAlignment,
+                            data: {
+                                form: data.form,
+                                verticalLayout: data.verticalLayout,
+                                autocompleteFormClassName: config.jsName ~ '__autocomplete-form',
+                            },
+                        } only %}
+                    {% endblock %}
+
+                    {% block merchantProductOffersSelectWidget %}
+                        {% widget 'MerchantProductOffersSelectWidget' with {
+                            data: {
+                                id: 'merchant-product-offers-select',
+                                submitButtonClassName: config.jsName ~ '__submit-button',
+                                autocompleteFormClassName: config.jsName ~ '__autocomplete-form',
+                            },
+                        } only %}{% endwidget %}
+                    {% endblock %}
+
+                    {% block button %}
+                        <div class="col col--sm-12 {{ not data.verticalLayout ? 'col--md-2' }}">
+                            <button class="{{ config.jsName }}__submit-button button button--expand button--success">
+                                {{ data.submitButtonTitle }}
+                            </button>
+                        </div>
+                    {% endblock %}
+                </div>
+            {{ form_end(data.form) }}
+        </div>
+    {% endblock %}
+{% endblock %}

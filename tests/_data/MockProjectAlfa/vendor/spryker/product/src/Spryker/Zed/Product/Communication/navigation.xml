@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config>
+    <product>
+        <label>Products</label>
+        <title>Products</title>
+        <icon>fa-database</icon>
+        <uri>#</uri>
+        <pages/>
+    </product>
+</config>

@@ -1,0 +1,35 @@
+{% extends model('component') %}
+
+{% define config = {
+    name: 'customer-reorder-form',
+    tag: 'customer-reorder-form',
+} %}
+
+{# @deprecated property "idSalesOrder" is deprecated. #}
+{% define data = {
+    idSalesOrder: '',
+    order: '',
+    shipmentGroups: '',
+    orderShipmentExpenses: [],
+} %}
+
+{% block body %}
+    {% block formContent %}
+        {% include molecule('order-detail', 'CustomerPage') ignore missing with {
+            data: {
+                order: data.order,
+                shipmentGroups: data.shipmentGroups,
+                orderShipmentExpenses: data.orderShipmentExpenses,
+                reorderSelectionClassName: config.jsName ~ '__selection',
+            },
+        } only %}
+    {% endblock %}
+
+    {% block formActions %}
+        <div class="box text-right">
+            <button class="button {{ config.jsName }}__trigger" disabled>
+                {{ 'customer.order.reorder_selected' | trans }}
+            </button>
+        </div>
+    {% endblock %}
+{% endblock %}

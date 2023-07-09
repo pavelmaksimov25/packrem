@@ -1,0 +1,21 @@
+namespace: SprykerShopTest\Yves\ProductBundleWidget
+
+paths:
+    tests: .
+    data: ../../../_data
+    support: _support
+    output: ../../../_output
+
+coverage:
+    enabled: true
+    remote: false
+
+suites:
+    Business:
+        path: .
+        actor: ProductBundleWidgetTester
+        modules:
+            enabled:
+                - Asserts
+                - \SprykerTest\Shared\Testify\Helper\Environment
+                - \SprykerTest\Shared\Testify\Helper\LocatorHelper

@@ -1,0 +1,21 @@
+namespace: SprykerTest
+
+include:
+    - tests/SprykerTest/Zed/DateTimeConfiguratorPageExample
+    - tests/SprykerTest/Yves/DateTimeConfiguratorPageExample
+
+paths:
+    tests: tests
+    support: .
+    output: tests/_output
+    data: tests/_data
+    envs: tests/_envs
+
+settings:
+    suite_class: \PHPUnit_Framework_TestSuite
+    colors: true
+    memory_limit: 1024M
+    log: true
+
+coverage:
+    enabled: true

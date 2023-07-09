@@ -1,0 +1,29 @@
+{
+  "name": "everon/criteria-builder",
+  "description": "Everon Criteria Builder Component",
+  "type": "library",
+  "license": "MIT",
+  "authors": [{
+    "name": "Oliwier Ptak",
+    "email": "everonphp@gmail.com"
+  }],
+  "minimum-stability": "dev",
+  "autoload": {
+    "psr-4": {
+      "Everon\\Component\\CriteriaBuilder\\": "src/",
+      "Everon\\Component\\CriteriaBuilder\\Tests\\Unit\\": "tests/unit/"
+    }
+  },
+  "require": {
+    "php": ">=5.6",
+    "everon/collection": "^1.0.0",
+    "everon/factory": "^1.1.0",
+    "everon/utils": "^1.0.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "*",
+    "mockery/mockery": "dev-master"
+  }
+}
+
+

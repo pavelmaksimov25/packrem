@@ -1,0 +1,74 @@
+{
+    "name": "spryker/rabbit-mq",
+    "type": "library",
+    "description": "RabbitMq module",
+    "homepage": "https://spryker.com",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.0",
+        "php-amqplib/php-amqplib": "^3.1.0",
+        "spryker/guzzle": "^2.1.0",
+        "spryker/kernel": "^3.56.0",
+        "spryker/log": "^3.7.0",
+        "spryker/queue": "^1.5.0",
+        "spryker/store": "^1.10.0",
+        "spryker/symfony": "^3.5.0",
+        "spryker/transfer": "^3.33.1"
+    },
+    "require-dev": {
+        "codeception/module-asserts": "*",
+        "codeception/stub": "^4.1",
+        "mikey179/vfsstream": "^1.6.11",
+        "spryker/code-sniffer": "^0.17.1",
+        "spryker/testify": "^3.47.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Spryker\\": "src/Spryker/",
+            "SprykerTest\\Client\\RabbitMq\\Helper\\": "tests/SprykerTest/Client/RabbitMq/_support/Helper/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SprykerTest\\": "tests/SprykerTest/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "test": "vendor/bin/codecept run",
+        "cs-check": "phpcs -p -s --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml --ignore=/tests/app/ src/ tests/",
+        "cs-fix": "phpcbf -p --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml --ignore=/tests/app/ src/ tests/",
+        "stan": "phpstan analyse",
+        "stan-setup": "cp composer.json composer.backup && composer require --dev phpstan/phpstan:^1.0.0 && mv composer.backup composer.json"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.0.x-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "support": {
+        "source": "https://github.com/spryker/rabbit-mq"
+    },
+    "authors": [
+        {
+            "name": "Spryker",
+            "homepage": "https://spryker.com"
+        }
+    ],
+    "keywords": [
+        "framework",
+        "rabbit-mq",
+        "queue",
+        "standards"
+    ],
+    "include-path": [
+        "src/"
+    ]
+}

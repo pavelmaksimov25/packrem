@@ -1,0 +1,13 @@
+{% for reclamationItem in items %}
+  <tr>
+      {% embed '@SalesReclamationGui/Detail/boxes/order-item.twig' with {
+          orderItem: reclamationItem.orderItem,
+          displayImage: reclamationItem.orderItem.metadata is not null,
+          image: reclamationItem.orderItem.metadata.image | default,
+          displayTotals: true,
+          group: false
+      } %}{% endembed %}
+  </tr>
+  {% embed '@SalesReclamationGui/Partials/items/order-item-option.twig' with {orderItem: reclamationItem.orderItem} %}
+  {% endembed %}
+{% endfor %}

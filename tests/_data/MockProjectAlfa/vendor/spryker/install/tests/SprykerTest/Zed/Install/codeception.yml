@@ -1,0 +1,36 @@
+namespace: SprykerTest\Zed\Install
+
+paths:
+    tests: .
+    data: ../../../_data
+    support: _support
+    output: ../../../_output
+
+coverage:
+    enabled: true
+    remote: false
+    whitelist: { include: ['../../../../src/*'] }
+
+bootstrap: ../../../_bootstrap.php
+
+suites:
+    Business:
+          path: Business
+          actor: InstallBusinessTester
+          modules:
+              enabled:
+                  - Asserts
+                  - \SprykerTest\Shared\Testify\Helper\Environment
+                  - \SprykerTest\Shared\Testify\Helper\ConfigHelper
+                  - \SprykerTest\Shared\Testify\Helper\LocatorHelper
+                  - \SprykerTest\Shared\Testify\Helper\DependencyHelper
+    Communication:
+          path: Communication
+          actor: InstallCommunicationTester
+          modules:
+              enabled:
+                  - Asserts
+                  - \SprykerTest\Shared\Testify\Helper\Environment
+                  - \SprykerTest\Shared\Testify\Helper\ConfigHelper
+                  - \SprykerTest\Shared\Testify\Helper\LocatorHelper
+                  - \SprykerTest\Shared\Testify\Helper\DependencyHelper

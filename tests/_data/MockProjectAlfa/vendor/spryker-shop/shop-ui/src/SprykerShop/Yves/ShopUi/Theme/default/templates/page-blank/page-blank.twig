@@ -1,0 +1,79 @@
+{% extends model('template') %}
+
+{% define data = {
+    locale: app.locale | slice(0, 2),
+    title: 'global.spryker.shop' | trans,
+    metaTitle: 'global.spryker.shop' | trans,
+    metaDescription: '',
+    metaKeywords: '',
+    hasCookies: app.request.cookies.get('last-visit'),
+    appLocale: app.locale,
+} %}
+
+{# @deprecated variable "isNewFrontendBuildSupported" is deprecated #}
+{% set isNewFrontendBuildSupported = false %}
+{% set isCssLazyLoadSupported = false %}
+
+{% block template %}
+    <!doctype html>
+    <html lang="{{ data.locale }}" data-locale="{{ data.appLocale }}">
+        <head>
+            {% block meta %}
+                <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+                <meta name="title" content="{% block metaTitle %}{{ data.metaTitle }}{% endblock %}">
+                <meta name="description" content="{% block metaDescription %}{{ data.metaDescription }}{% endblock %}">
+                <meta name="keywords" content="{% block metaKeywords %}{{ data.metaKeywords }}{% endblock %}">
+                <meta name="generator" content="spryker">
+            {% endblock %}
+
+            {% block headStyles %}
+                {% if isCssLazyLoadSupported %}
+                    <link rel="stylesheet" href="{{ publicPath('css/yves_default.critical.css') }}">
+
+                    {% block nonCriticalStyles %}
+                        <link rel="stylesheet" href="{{ publicPath('css/yves_default.non-critical.css') }}">
+                    {% endblock %}
+                {% else %}
+                    <link rel="stylesheet" href="{{ publicPath('css/yves_default.app.css') }}">
+                {% endif %}
+            {% endblock %}
+
+            {% block headScripts %}
+                {% widget 'AssetWidget' args ['header-top'] only %}{% endwidget %}
+
+                <script type="module" src="{{ publicPath('js/yves_default.runtime.js') }}" crossorigin="anonymous"></script>
+
+                {# @deprecated block "esmHeadScripts" is deprecated #}
+                {% block esmHeadScripts %}{% endblock %}
+                {# @deprecated block "legacyHeadScripts" is deprecated #}
+                {% block legacyHeadScripts %}{% endblock %}
+
+                {% widget 'AssetWidget' args ['header'] only %}{% endwidget %}
+            {% endblock %}
+
+            <title>{% block headTitle %}{{ data.title }}{% endblock %}</title>
+        </head>
+        <body {%- if block('class') is not empty %} class="{%- block class -%}{%- endblock -%}"{%- endif %}
+            {%- block attributes %} {{qa('page')}} {% endblock -%}>
+
+            {{ parent() }}
+
+            {% block footerScripts %}
+                {% widget 'AssetWidget' args ['footer'] only %}{% endwidget %}
+
+                <script type="module" src="{{ publicPath('js/yves_default.vendor.js') }}" crossorigin="anonymous"></script>
+                <script type="module" src="{{ publicPath('js/yves_default.app.js') }}" crossorigin="anonymous"></script>
+
+                {# @deprecated block "esmFooterScripts" is deprecated #}
+                {% block esmFooterScripts %}{% endblock %}
+                {# @deprecated block "legacyFooterScripts" is deprecated #}
+                {% block legacyFooterScripts %}{% endblock %}
+
+                {%- block styleLazyLoader %}{% endblock -%}
+
+                {% widget 'AssetWidget' args ['footer-bottom'] only %}{% endwidget %}
+            {% endblock %}
+        </body>
+    </html>
+{% endblock %}

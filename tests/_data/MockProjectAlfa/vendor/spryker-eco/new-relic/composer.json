@@ -1,0 +1,40 @@
+{
+  "name": "spryker-eco/new-relic",
+  "description": "NewRelic module",
+  "license": "proprietary",
+  "require": {
+    "php": ">=7.2",
+    "psr/http-message": "^1.0.0",
+    "spryker/guzzle": "^2.0.0",
+    "spryker/kernel": "^3.30.0",
+    "spryker/monitoring-extension": "^1.0.0",
+    "spryker/symfony": "^3.1.0"
+  },
+  "require-dev": {
+    "codeception/codeception": "^2.0.0",
+    "phpstan/phpstan": "^0.9.2 || ^0.10.0"
+  },
+  "conflict":  {
+    "spryker/new-relic": "*",
+    "spryker/new-relic-api": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "SprykerEco\\": "src/SprykerEco/"
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "extra": {
+    "branch-alias": {
+      "dev-master": "2.0.x-dev"
+    }
+  },
+  "scripts": {
+    "cs-check": "phpcs -p -s --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml src/ tests/",
+    "cs-fix": "phpcbf -p --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml src/ tests/"
+  },
+  "config": {
+    "sort-packages": true
+  }
+}

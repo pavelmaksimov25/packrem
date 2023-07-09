@@ -1,0 +1,13 @@
+{% extends template('widget') %}
+
+{% define data = {
+    node: _widget.item,
+} %}
+
+{% block body %}
+    {% include molecule('summary-product-packaging-unit-node', 'ProductPackagingUnitWidget') with {
+        data: {
+            node: data.node,
+        },
+    } only %}
+{% endblock body %}

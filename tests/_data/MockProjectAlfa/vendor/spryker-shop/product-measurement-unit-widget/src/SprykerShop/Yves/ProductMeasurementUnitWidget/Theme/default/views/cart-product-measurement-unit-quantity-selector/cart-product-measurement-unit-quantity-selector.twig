@@ -1,0 +1,42 @@
+{% extends template('widget') %}
+
+{% define data = {
+    cartItem: _widget.itemTransfer,
+    quantitySalesUnit: _widget.quantitySalesUnit,
+    quantitySalesUnitPrecision: _widget.quantitySalesUnitPrecision | default(null),
+    numberFormatConfig: _widget.numberFormatConfig | default({}),
+} %}
+
+{% set numberFormatConfig = {} %}
+{% for key, value in data.numberFormatConfig %}
+    {% set numberFormatConfig = numberFormatConfig | merge ({ (key | replace({'_symbol': '', '_': '-'})): value }) %}
+{% endfor %}
+
+{% set hasQuantitySalesUnit = data.quantitySalesUnit.idProductMeasurementSalesUnit | default(false) %}
+
+{%- block hasSalesUnit -%}
+    {{- hasQuantitySalesUnit -}}
+{%- endblock -%}
+
+{% block body %}
+    {% include molecule('cart-quantity-input', 'CartPage') ignore missing with {
+        data: {
+            cartItem: data.cartItem,
+            readOnly: hasQuantitySalesUnit,
+            numberFormatConfig: numberFormatConfig,
+        },
+    } only %}
+
+    {% block quantitySalesUnit %}
+        {% if hasQuantitySalesUnit %}
+            {% include molecule('measurement-unit-item', 'ProductMeasurementUnitWidget') with {
+                class: 'spacing spacing--reset',
+                data: {
+                    cartItem: data.cartItem,
+                    quantitySalesUnit: data.quantitySalesUnit,
+                    quantitySalesUnitPrecision: data.quantitySalesUnitPrecision,
+                },
+            } only %}
+        {% endif %}
+    {% endblock %}
+{% endblock %}

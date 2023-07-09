@@ -1,0 +1,6 @@
+namespace: SprykerTest\Shared\ProductRelation
+paths:
+    tests: .
+    data: ../../../_data
+    support: _support
+    output: ../../../_output

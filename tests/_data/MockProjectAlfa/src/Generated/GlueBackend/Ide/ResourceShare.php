@@ -1,0 +1,10 @@
+<?php
+
+namespace Generated\GlueBackend\Ide;
+
+/**
+ * @method \Spryker\Client\ResourceShare\ResourceShareClientInterface client()
+ * @method \Spryker\Zed\ResourceShare\Business\ResourceShareFacadeInterface facade()
+ */
+interface ResourceShare
+{}
