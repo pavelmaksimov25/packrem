@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace SprykerSdk\SprykerFeatureRemover\Command;
 
+use SprykerSdk\SprykerFeatureRemover\Adapter\ComposerAdapter;
 use SprykerSdk\SprykerFeatureRemover\PackageRemover\PackageRemover;
 use SprykerSdk\SprykerFeatureRemover\Validator\PackageValidator;
 use Symfony\Component\Console\Command\Command;

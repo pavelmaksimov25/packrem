@@ -9,7 +9,6 @@ declare(strict_types=1);
 
 namespace SprykerSdk\SprykerFeatureRemover\Validator;
 
-use Composer\InstalledVersions;
 use SprykerSdk\SprykerFeatureRemover\Adapter\ComposerAdapter;
 use SprykerSdk\SprykerFeatureRemover\Dto\PackageInputValidationResult;
 
@@ -42,12 +41,12 @@ class PackageValidator
         return $result;
     }
 
-    public function isSprykerPackage(string $packageName): bool
+    private function isSprykerPackage(string $packageName): bool
     {
         return (bool)preg_match('/^spryker/', strtolower($packageName));
     }
 
-    public function isPackageInstalled(string $packageName): bool
+    private function isPackageInstalled(string $packageName): bool
     {
         return $this->composerAdapter->isInstalled($packageName);
     }

@@ -9,29 +9,40 @@ declare(strict_types=1);
 
 namespace SprykerSdk\SprykerFeatureRemover\Resolver;
 
+use SprykerSdk\SprykerFeatureRemover\Adapter\ComposerAdapter;
+
 class ModuleResolver
 {
-    public function resolveModuleNameByPackageName(string $packageName): array
+    public function __construct(private ComposerAdapter $composerAdapter)
     {
-        if ($this->isFeaturePackage($packageName)) {
-            return $this->resolveMany($packageName);
+    }
+
+    public function resolveRegularModuleNameByPackageName(string $packageName): string
+    {
+        $packageName = basename($packageName);
+        $packageName = ucwords($packageName, '-');
+
+        return str_replace('-', '', $packageName);
+    }
+
+    public function resolveFeatureModuleNameByPackageName(string $featurePackageName): array
+    {
+        $dependencies = [];
+        $packages = $this->composerAdapter->getListOfPackageDependencies($featurePackageName);
+        $packages = $this->composerAdapter->sprykerPackagesOnly($packages);
+        foreach ($packages as $package) {
+            if ($this->isFeaturePackage($package)) {
+                throw new \Exception("$featurePackageName feature package contains another feature package. Can not be removed, please remove manually.");
+            }
+
+            $dependencies[] = $this->resolveRegularModuleNameByPackageName($package);
         }
 
-        return $this->resolveOne($packageName);
+        return $dependencies;
     }
 
-    private function isFeaturePackage(string $packageName): bool
+    public function isFeaturePackage(string $packageName): bool
     {
-        return false; // TODO :: stub
-    }
-
-    private function resolveMany(string $packageName): array
-    {
-        return []; // TODO :: stub
-    }
-
-    private function resolveOne(string $packageName): array
-    {
-        return []; // TODO :: stub
+        return (bool)preg_match('/^spryker-feature/', strtolower($packageName));
     }
 }
