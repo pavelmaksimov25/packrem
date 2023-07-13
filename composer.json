@@ -1,7 +1,7 @@
 {
     "name": "pavelmaksimov25/spryker-feature-remover",
     "description": "This tool helps a developer to remove spryker features in the semi-automatical way.",
-    "license": "Proprietary",
+    "license": "proprietary",
     "type": "project",
     "authors": [
         {

@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace SprykerSdkTests\Validator;
 
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use SprykerSdk\SprykerFeatureRemover\Adapter\ComposerAdapter;
 use SprykerSdk\SprykerFeatureRemover\Dto\PackageInputValidationResult;
@@ -78,7 +79,7 @@ class PackageValidatorTest extends TestCase
                     return false;
                 }
 
-                throw new \InvalidArgumentException('Invalid input');
+                throw new InvalidArgumentException('Invalid input');
             }));
         $validator = new PackageValidator($composerAdapterMock);
         $packageList = ['spryker/package1', 'spryker/non-existent'];

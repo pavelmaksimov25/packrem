@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace SprykerSdk\SprykerFeatureRemover\Resolver;
 
+use Exception;
 use SprykerSdk\SprykerFeatureRemover\Adapter\ComposerAdapter;
 
 class ModuleResolver
@@ -32,7 +33,7 @@ class ModuleResolver
         $packages = $this->composerAdapter->sprykerPackagesOnly($packages);
         foreach ($packages as $package) {
             if ($this->isFeaturePackage($package)) {
-                throw new \Exception("$featurePackageName feature package contains another feature package. Can not be removed, please remove manually.");
+                throw new Exception("$featurePackageName feature package contains another feature package. Can not be removed, please remove manually.");
             }
 
             $dependencies[] = $this->resolveRegularModuleNameByPackageName($package);

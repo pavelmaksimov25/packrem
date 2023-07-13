@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Copyright © 2016-present Spryker Systems GmbH. All rights reserved.
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ */
+
+declare(strict_types=1);
+
 namespace SprykerSdkTests\Adapter;
 
 use PHPUnit\Framework\TestCase;
@@ -7,8 +14,14 @@ use SprykerSdk\SprykerFeatureRemover\Adapter\ComposerAdapter;
 
 class ComposerAdapterTest extends TestCase
 {
+    /**
+     * @var string
+     */
     private const COMPOSER_LOCK_PATH = 'tests/_data/MockProjectBeta/composer.lock';
 
+    /**
+     * @return void
+     */
     public function testGetListOfPackageDependencies(): void
     {
         $composerAdapter = new ComposerAdapter(static::COMPOSER_LOCK_PATH);
@@ -27,6 +40,9 @@ class ComposerAdapterTest extends TestCase
         $this->assertContains($expectedDependencies[1], $dependencies);
     }
 
+    /**
+     * @return void
+     */
     public function testSprykerPackagesOnly(): void
     {
         $composerAdapter = new ComposerAdapter();

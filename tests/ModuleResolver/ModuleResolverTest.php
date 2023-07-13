@@ -1,13 +1,24 @@
 <?php
 
+/**
+ * Copyright © 2016-present Spryker Systems GmbH. All rights reserved.
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ */
+
+declare(strict_types=1);
+
 namespace SprykerSdkTests\ModuleResolver;
 
+use Exception;
 use PHPUnit\Framework\TestCase;
 use SprykerSdk\SprykerFeatureRemover\Adapter\ComposerAdapter;
 use SprykerSdk\SprykerFeatureRemover\Resolver\ModuleResolver;
 
 class ModuleResolverTest extends TestCase
 {
+    /**
+     * @return void
+     */
     public function testResolveRegularModuleNameByPackageName(): void
     {
         // Arrange
@@ -23,6 +34,9 @@ class ModuleResolverTest extends TestCase
         $this->assertSame($expectedModuleName, $resolvedModuleName);
     }
 
+    /**
+     * @return void
+     */
     public function testIsFeaturePackage(): void
     {
         // Arrange
@@ -40,6 +54,9 @@ class ModuleResolverTest extends TestCase
         $this->assertFalse($isNonFeaturePackage);
     }
 
+    /**
+     * @return void
+     */
     public function testResolveFeatureModuleNameByPackageNameThrowsException(): void
     {
         // Arrange & Assert
@@ -50,13 +67,16 @@ class ModuleResolverTest extends TestCase
         $moduleResolver = new ModuleResolver($composerAdapterMock);
         $featurePackageName = 'spryker-feature-foo';
 
-        $this->expectException(\Exception::class);
+        $this->expectException(Exception::class);
         $this->expectExceptionMessage("$featurePackageName feature package contains another feature package. Can not be removed, please remove manually.");
 
         // Act
         $moduleResolver->resolveFeatureModuleNameByPackageName($featurePackageName);
     }
 
+    /**
+     * @return void
+     */
     public function testResolveFeatureModuleNameByPackageName(): void
     {
         // Arrange

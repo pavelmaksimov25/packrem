@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Copyright © 2016-present Spryker Systems GmbH. All rights reserved.
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ */
+
+declare(strict_types=1);
+
 namespace SprykerSdk\SprykerFeatureRemover\Actions;
 
 use SprykerSdk\SprykerFeatureRemover\Adapter\RmDirAdapter;
@@ -11,6 +18,9 @@ class ModuleFolderRemover implements ActionInterface
     {
     }
 
+    /**
+     * @return void
+     */
     public function act(ActionDto $actionDto): void
     {
         $result = $this->rmDirAdapter->removeModuleDirectoryFromProjectSrc($actionDto->getModuleName());

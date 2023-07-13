@@ -47,7 +47,6 @@ class PackageRemoverTest extends TestCase
         // Act
         $result = $packagesRemover->removePackages($directoryNames);
 
-        //
         $this->assertInstanceOf(PackageRemoveResult::class, $result);
 
         $this->assertTrue(

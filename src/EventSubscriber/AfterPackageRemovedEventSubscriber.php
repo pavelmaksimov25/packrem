@@ -1,8 +1,14 @@
 <?php
 
+/**
+ * Copyright © 2016-present Spryker Systems GmbH. All rights reserved.
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
+ */
+
+declare(strict_types=1);
+
 namespace SprykerSdk\SprykerFeatureRemover\EventSubscriber;
 
-use SprykerSdk\SprykerFeatureRemover\Actions\ActionInterface;
 use SprykerSdk\SprykerFeatureRemover\Dto\ActionDto;
 use SprykerSdk\SprykerFeatureRemover\Event\PackageRemovedEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -10,7 +16,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class AfterPackageRemovedEventSubscriber implements EventSubscriberInterface
 {
     /**
-     * @param array<ActionInterface> $actions
+     * @param array<\SprykerSdk\SprykerFeatureRemover\Actions\ActionInterface> $actions
      */
     public function __construct(private array $actions)
     {
@@ -20,11 +26,14 @@ class AfterPackageRemovedEventSubscriber implements EventSubscriberInterface
     {
         return [
             PackageRemovedEvent::NAME => [
-                ['processAfterModuleRemoved', 0]
+                ['processAfterModuleRemoved', 0],
             ],
         ];
     }
 
+    /**
+     * @return void
+     */
     public function processAfterModuleRemoved(PackageRemovedEvent $event): void
     {
         $actionDto = new ActionDto();

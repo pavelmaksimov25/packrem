@@ -11,6 +11,9 @@ namespace SprykerSdk\SprykerFeatureRemover\Event;
 
 class PackageRemovedEvent
 {
+    /**
+     * @var string
+     */
     public const NAME = 'package_removed';
 
     public function __construct(private string $moduleName)
