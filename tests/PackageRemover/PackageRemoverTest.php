@@ -23,7 +23,7 @@ class PackageRemoverTest extends TestCase
      */
     public function testRemovePackagesRemovesModulesByTheirNames(): void
     {
-        // Assert
+        // Arrange
         $directoryNames = [
             'spryker/dummy1',
         ];
@@ -47,7 +47,7 @@ class PackageRemoverTest extends TestCase
         // Act
         $result = $packagesRemover->removePackages($directoryNames);
 
-        // Arrange
+        //
         $this->assertInstanceOf(PackageRemoveResult::class, $result);
 
         $this->assertTrue(
@@ -60,5 +60,33 @@ class PackageRemoverTest extends TestCase
             $result->getMessages(),
             'The result must not contain any messages.',
         );
+    }
+
+    /**
+     * @return void
+     */
+    public function testRemovePackagesReturnsErrorIfPackageRemovalIsNotPossible(): void
+    {
+        // Arrange
+        $directoryNames = [
+            'spryker/dummy1',
+        ];
+
+        $runnerMock = $this->createMock(RunnerInterface::class);
+        $runnerMock->expects($this->once())
+            ->method('run')
+            ->willReturn(false);
+
+        $eventDispatcherMock = $this->createMock(EventDispatcher::class);
+        $eventDispatcherMock->expects($this->never())->method('dispatch');
+
+        $packagesRemover = new PackageRemover($runnerMock, $eventDispatcherMock);
+
+        // Act
+        $result = $packagesRemover->removePackages($directoryNames);
+
+        // Assert
+        $this->assertFalse($result->isOk());
+        $this->assertSame("Unable to remove $directoryNames[0]. Error: ", $result->getMessages()[0]);
     }
 }

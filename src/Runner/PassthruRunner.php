@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace SprykerSdk\SprykerFeatureRemover\Runner;
 
-class Runner implements RunnerInterface
+class PassthruRunner implements RunnerInterface
 {
     public function run(string $command): mixed
     {

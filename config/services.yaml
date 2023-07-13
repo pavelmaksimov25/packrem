@@ -4,11 +4,19 @@ services:
     _defaults:
         autowire: true
         autoconfigure: true
+        bind:
+            $projectNamespace: '%env(PROJECT_NAMESPACE)%'
 
     SprykerSdk\SprykerFeatureRemover\:
         resource: '../src/'
         exclude:
             - '../src/Kernel.php'
+            - '../src/Dto'
+            - '../src/Event'
 
     SprykerSdk\SprykerFeatureRemover\Command\RemovePackagesCommand:
         tags: ['console.command']
+
+    SprykerSdk\SprykerFeatureRemover\EventSubscriber\AfterPackageRemovedEventSubscriber:
+        arguments:
+            - - '@SprykerSdk\SprykerFeatureRemover\Actions\ModuleFolderRemover'

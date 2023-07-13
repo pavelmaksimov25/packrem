@@ -37,6 +37,7 @@ class PackageRemover
             // package remove
             $result = $this->runner->run('composer remove ' . $package);
             if ($result === false) {
+                $resultDto->setIsOk(false);
                 $resultDto->addMessage("Unable to remove $package. Error: "); // todo :: pass original error
 
                 return $resultDto;
