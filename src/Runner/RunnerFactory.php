@@ -9,10 +9,10 @@ declare(strict_types=1);
 
 namespace SprykerSdk\SprykerFeatureRemover\Runner;
 
-class PassthruRunner implements RunnerInterface
+class RunnerFactory
 {
-    public function run(string $command): mixed
+    public function createRunner(bool $isDryRun): RunnerInterface
     {
-        return passthru($command) !== false;
+        return $isDryRun ? new EchoRunner() : new PassthruRunner();
     }
 }

@@ -1,8 +1,0 @@
-sections:
-  section-a:
-    section-a-command-a:
-      command: "lskdf"
-      breakOnFailure: false
-
-    section-a-command-b:
-      command: "echo 'catface'"

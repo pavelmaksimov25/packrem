@@ -12,7 +12,7 @@ namespace SprykerSdk\SprykerFeatureRemover\Adapter;
 class RmDirAdapter
 {
     /**
-     * @var array
+     * @var array<string>
      */
     public const APP_LAYERS = [
         'Client',

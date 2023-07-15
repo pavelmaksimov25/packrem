@@ -18,14 +18,9 @@ class ModuleResolver
     {
     }
 
-    public function resolveRegularModuleNameByPackageName(string $packageName): string
-    {
-        $packageName = basename($packageName);
-        $packageName = ucwords($packageName, '-');
-
-        return str_replace('-', '', $packageName);
-    }
-
+    /**
+     * @throws Exception
+     */
     public function resolveFeatureModuleNameByPackageName(string $featurePackageName): array
     {
         $dependencies = [];
@@ -33,7 +28,9 @@ class ModuleResolver
         $packages = $this->composerAdapter->sprykerPackagesOnly($packages);
         foreach ($packages as $package) {
             if ($this->isFeaturePackage($package)) {
+                // @codingStandardsIgnoreStart
                 throw new Exception("$featurePackageName feature package contains another feature package. Can not be removed, please remove manually.");
+                // @codingStandardsIgnoreEnd
             }
 
             $dependencies[] = $this->resolveRegularModuleNameByPackageName($package);
@@ -45,5 +42,13 @@ class ModuleResolver
     public function isFeaturePackage(string $packageName): bool
     {
         return (bool)preg_match('/^spryker-feature/', strtolower($packageName));
+    }
+
+    public function resolveRegularModuleNameByPackageName(string $packageName): string
+    {
+        $packageName = basename($packageName);
+        $packageName = ucwords($packageName, '-');
+
+        return str_replace('-', '', $packageName);
     }
 }

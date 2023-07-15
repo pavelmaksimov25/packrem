@@ -1,9 +1,0 @@
-{% extends view('cart-bundle-items-list', '@SprykerShop:ProductBundleWidget') %}
-
-{% block body %}
-    {% include molecule('bundle-items', 'ProductBundleWidget') with {
-        data: {
-            items: data.items,
-        },
-    } only %}
-{% endblock %}

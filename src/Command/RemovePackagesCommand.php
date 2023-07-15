@@ -14,6 +14,7 @@ use SprykerSdk\SprykerFeatureRemover\Validator\PackageValidator;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class RemovePackagesCommand extends Command
@@ -25,7 +26,7 @@ class RemovePackagesCommand extends Command
 
     public function __construct(private PackageRemover $packageRemover, private PackageValidator $packageValidator)
     {
-        parent::__construct(static::NAME);
+        parent::__construct(self::NAME);
     }
 
     /**
@@ -35,14 +36,15 @@ class RemovePackagesCommand extends Command
     {
         $this
             ->setDescription('Removes Spryker packages with the related code on the project level.')
-            ->addArgument('packages', InputArgument::IS_ARRAY, 'List of spryker packages');
+            ->addArgument('packages', InputArgument::IS_ARRAY, 'List of spryker packages')
+            ->addOption('dry-run', '', InputOption::VALUE_NONE, 'Dry-run mode,');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $packages = $input->getArgument('packages');
         if (count($packages) === 0) {
-            $output->writeln('<warning>No packages provided.</warning>');
+            $output->writeln('<comment>No packages provided.</comment>');
 
             return Command::SUCCESS;
         }
@@ -54,13 +56,14 @@ class RemovePackagesCommand extends Command
             return Command::FAILURE;
         }
 
-        $result = $this->packageRemover->removePackages($packages);
+        $result = $this->packageRemover->removePackages($packages, (bool)$input->getOption('dry-run'));
         if (!$result->isOk()) {
             $output->writeln($result->getMessages());
         }
 
-        $output->writeln('Done. Removed packages:');
+        $output->writeln('Removed packages:');
         $output->writeln($packages);
+        $output->writeln('<info>Done!</info>');
 
         return Command::SUCCESS;
     }

@@ -1,7 +1,0 @@
-{
-    "exclude": {
-        "spryker/config": "Only needed in a Project context.",
-        "spryker/console": "Only needed in a Project context.",
-        "spryker/kernel": "Only needed in a Project context."
-    }
-}

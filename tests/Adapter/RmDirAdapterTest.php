@@ -29,8 +29,8 @@ class RmDirAdapterTest extends TestCase
      */
     protected function setUp(): void
     {
-        if (file_exists('src/' . static::PROJECT_NAMESPACE)) {
-            exec('rm -rf ' . 'src/' . static::PROJECT_NAMESPACE);
+        if (file_exists('src/' . self::PROJECT_NAMESPACE)) {
+            exec('rm -rf ' . 'src/' . self::PROJECT_NAMESPACE);
         }
 
         if (file_exists('src/Orm')) {
@@ -43,7 +43,7 @@ class RmDirAdapterTest extends TestCase
      */
     protected function tearDown(): void
     {
-        exec('rm -rf ' . 'src/' . static::PROJECT_NAMESPACE);
+        exec('rm -rf ' . 'src/' . self::PROJECT_NAMESPACE);
         exec('rm -rf ' . 'src/Orm');
     }
 
@@ -57,10 +57,10 @@ class RmDirAdapterTest extends TestCase
             mkdir($this->makeModulePathInProject($appLayer), 0755, true);
         }
 
-        $adapter = new RmDirAdapter(static::PROJECT_NAMESPACE);
+        $adapter = new RmDirAdapter(self::PROJECT_NAMESPACE);
 
         // Act
-        $isOk = $adapter->removeModuleDirectoryFromProjectSrc(static::MODULE_NAME);
+        $isOk = $adapter->removeModuleDirectoryFromProjectSrc(self::MODULE_NAME);
 
         // Arrange
         $this->assertTrue($isOk);
@@ -85,17 +85,17 @@ class RmDirAdapterTest extends TestCase
     public function testRemoveModuleDirectoryFromProjectOrmRemovesModule(): void
     {
         // Assert
-        mkdir('src/Orm/Zed/' . static::MODULE_NAME, 0755, true);
-        $adapter = new RmDirAdapter(static::PROJECT_NAMESPACE);
+        mkdir('src/Orm/Zed/' . self::MODULE_NAME, 0755, true);
+        $adapter = new RmDirAdapter(self::PROJECT_NAMESPACE);
 
         // Act
-        $isOk = $adapter->removeModuleDirectoryFromProjectOrm(static::MODULE_NAME);
+        $isOk = $adapter->removeModuleDirectoryFromProjectOrm(self::MODULE_NAME);
 
         // Arrange
         $this->assertTrue($isOk);
         $this->assertFalse(
-            file_exists('src/Orm/Zed/' . static::MODULE_NAME),
-            'Module ' . static::MODULE_NAME . ' must be removed from src/Orm/Zed/ directory.',
+            file_exists('src/Orm/Zed/' . self::MODULE_NAME),
+            'Module ' . self::MODULE_NAME . ' must be removed from src/Orm/Zed/ directory.',
         );
     }
 
@@ -103,9 +103,9 @@ class RmDirAdapterTest extends TestCase
     {
         return sprintf(
             'src/%s/%s/%s',
-            static::PROJECT_NAMESPACE,
+            self::PROJECT_NAMESPACE,
             $appLayer,
-            static::MODULE_NAME,
+            self::MODULE_NAME,
         );
     }
 }

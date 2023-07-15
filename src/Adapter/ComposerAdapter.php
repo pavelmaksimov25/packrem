@@ -22,6 +22,11 @@ class ComposerAdapter
         return InstalledVersions::isInstalled($packageName);
     }
 
+    /**
+     * @param string $packageName
+     *
+     * @return array<string>
+     */
     public function getListOfPackageDependencies(string $packageName): array
     {
         // Read the composer.lock file
@@ -51,11 +56,16 @@ class ComposerAdapter
         return array_unique(array_merge(...$dependencies));
     }
 
+    /**
+     * @param array<string> $packages
+     *
+     * @return array<string>
+     */
     public function sprykerPackagesOnly(array $packages): array
     {
         return array_filter(
             $packages,
-            fn ($packageName) => str_contains($packageName, 'spryker'),
+            fn($packageName): bool => str_contains($packageName, 'spryker'),
         );
     }
 }

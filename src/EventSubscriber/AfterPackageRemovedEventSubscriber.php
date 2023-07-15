@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace SprykerSdk\SprykerFeatureRemover\EventSubscriber;
 
+use SprykerSdk\SprykerFeatureRemover\Actions\ActionInterface;
 use SprykerSdk\SprykerFeatureRemover\Dto\ActionDto;
 use SprykerSdk\SprykerFeatureRemover\Event\PackageRemovedEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -16,7 +17,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class AfterPackageRemovedEventSubscriber implements EventSubscriberInterface
 {
     /**
-     * @param array<\SprykerSdk\SprykerFeatureRemover\Actions\ActionInterface> $actions
+     * @param array<ActionInterface> $actions
      */
     public function __construct(private array $actions)
     {
@@ -36,6 +37,12 @@ class AfterPackageRemovedEventSubscriber implements EventSubscriberInterface
      */
     public function processAfterModuleRemoved(PackageRemovedEvent $event): void
     {
+        if ($event->isDryRun()) {
+            echo 'dry-run enabled. Nothing to execute.' . PHP_EOL;
+
+            return;
+        }
+
         $actionDto = new ActionDto();
         $actionDto->setModuleName($event->getModuleName());
         foreach ($this->actions as $action) {

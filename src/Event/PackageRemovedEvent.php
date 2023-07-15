@@ -16,7 +16,7 @@ class PackageRemovedEvent
      */
     public const NAME = 'package_removed';
 
-    public function __construct(private string $moduleName)
+    public function __construct(private string $moduleName, private bool $isDryRun = false)
     {
     }
 
@@ -26,5 +26,13 @@ class PackageRemovedEvent
     public function getModuleName(): string
     {
         return $this->moduleName;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDryRun(): bool
+    {
+        return $this->isDryRun;
     }
 }

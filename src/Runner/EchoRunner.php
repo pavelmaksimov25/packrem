@@ -9,10 +9,16 @@ declare(strict_types=1);
 
 namespace SprykerSdk\SprykerFeatureRemover\Runner;
 
-class PassthruRunner implements RunnerInterface
+class EchoRunner implements RunnerInterface
 {
+    /**
+     * @inheritDoc
+     */
     public function run(string $command): mixed
     {
-        return passthru($command) !== false;
+        echo 'dry-run mode enabled.' . PHP_EOL;
+        echo $command . PHP_EOL;
+
+        return true;
     }
 }

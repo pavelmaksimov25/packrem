@@ -1,1 +1,0 @@
-import './products-list.scss';

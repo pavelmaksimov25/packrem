@@ -13,6 +13,9 @@ class PackageRemoveResult
 {
     private bool $isOk = true;
 
+    /**
+     * @var array<string>
+     */
     private array $messages = [];
 
     /**
@@ -34,7 +37,7 @@ class PackageRemoveResult
     }
 
     /**
-     * @return array
+     * @return array<string>
      */
     public function getMessages(): array
     {

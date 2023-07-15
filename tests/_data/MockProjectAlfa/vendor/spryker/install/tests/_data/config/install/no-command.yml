@@ -1,8 +1,0 @@
-env:
-    foo: bar
-
-sections:
-    section-one:
-
-    section-two:
-        command-foo: "ls -la"

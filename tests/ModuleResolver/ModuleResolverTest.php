@@ -68,7 +68,10 @@ class ModuleResolverTest extends TestCase
         $featurePackageName = 'spryker-feature-foo';
 
         $this->expectException(Exception::class);
+
+        // @codingStandardsIgnoreStart
         $this->expectExceptionMessage("$featurePackageName feature package contains another feature package. Can not be removed, please remove manually.");
+        // @codingStandardsIgnoreEnd
 
         // Act
         $moduleResolver->resolveFeatureModuleNameByPackageName($featurePackageName);

@@ -13,6 +13,9 @@ class ActionDto
 {
     private string $moduleName = '';
 
+    /**
+     * @var array<string>
+     */
     private array $errorMessages = [];
 
     public function getModuleName(): string
@@ -28,6 +31,9 @@ class ActionDto
         $this->moduleName = $moduleName;
     }
 
+    /**
+     * @return string[]
+     */
     public function getErrorMessages(): array
     {
         return $this->errorMessages;

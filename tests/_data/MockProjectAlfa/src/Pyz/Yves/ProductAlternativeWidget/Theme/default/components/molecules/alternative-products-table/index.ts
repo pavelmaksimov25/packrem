@@ -1,1 +1,0 @@
-import './alternative-products-table';
