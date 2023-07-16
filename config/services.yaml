@@ -15,7 +15,7 @@ services:
             - '../src/Event'
 
     _instanceof:
-        SprykerSdk\SprykerFeatureRemover\ActionsActionInterface:
+        SprykerSdk\SprykerFeatureRemover\Action\ActionInterface:
             tags: ['action.post-remove']
 
     SprykerSdk\SprykerFeatureRemover\Command\RemovePackagesCommand:

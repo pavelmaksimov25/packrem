@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace SprykerSdk\SprykerFeatureRemover\EventSubscriber;
 
-use SprykerSdk\SprykerFeatureRemover\Actions\ActionInterface;
+use SprykerSdk\SprykerFeatureRemover\Action\ActionInterface;
 use SprykerSdk\SprykerFeatureRemover\Dto\ActionDto;
 use SprykerSdk\SprykerFeatureRemover\Event\PackageRemovedEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

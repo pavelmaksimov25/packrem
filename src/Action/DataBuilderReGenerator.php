@@ -1,6 +1,6 @@
 <?php
 
-namespace SprykerSdk\SprykerFeatureRemover\Actions;
+namespace SprykerSdk\SprykerFeatureRemover\Action;
 
 use SprykerSdk\SprykerFeatureRemover\Dto\ActionDto;
 

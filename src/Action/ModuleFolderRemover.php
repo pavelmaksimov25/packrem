@@ -7,7 +7,7 @@
 
 declare(strict_types=1);
 
-namespace SprykerSdk\SprykerFeatureRemover\Actions;
+namespace SprykerSdk\SprykerFeatureRemover\Action;
 
 use SprykerSdk\SprykerFeatureRemover\Adapter\RmModuleDirAdapter;
 use SprykerSdk\SprykerFeatureRemover\Dto\ActionDto;
