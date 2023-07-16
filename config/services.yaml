@@ -14,9 +14,13 @@ services:
             - '../src/Dto'
             - '../src/Event'
 
+    _instanceof:
+        SprykerSdk\SprykerFeatureRemover\ActionsActionInterface:
+            tags: ['action.post-remove']
+
     SprykerSdk\SprykerFeatureRemover\Command\RemovePackagesCommand:
         tags: ['console.command']
 
     SprykerSdk\SprykerFeatureRemover\EventSubscriber\AfterPackageRemovedEventSubscriber:
         arguments:
-            - - '@SprykerSdk\SprykerFeatureRemover\Actions\ModuleFolderRemover'
+            - !tagged_iterator action.post-remove

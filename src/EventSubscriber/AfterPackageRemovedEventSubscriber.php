@@ -17,9 +17,9 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class AfterPackageRemovedEventSubscriber implements EventSubscriberInterface
 {
     /**
-     * @param array<ActionInterface> $actions
+     * @param iterable<ActionInterface> $actions
      */
-    public function __construct(private array $actions)
+    public function __construct(private iterable $actions)
     {
     }
 
