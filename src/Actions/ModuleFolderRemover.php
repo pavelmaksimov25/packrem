@@ -9,12 +9,12 @@ declare(strict_types=1);
 
 namespace SprykerSdk\SprykerFeatureRemover\Actions;
 
-use SprykerSdk\SprykerFeatureRemover\Adapter\RmDirAdapter;
+use SprykerSdk\SprykerFeatureRemover\Adapter\RmModuleDirAdapter;
 use SprykerSdk\SprykerFeatureRemover\Dto\ActionDto;
 
 class ModuleFolderRemover implements ActionInterface
 {
-    public function __construct(private RmDirAdapter $rmDirAdapter)
+    public function __construct(private RmModuleDirAdapter $rmDirAdapter)
     {
     }
 

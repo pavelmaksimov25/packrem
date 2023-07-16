@@ -10,7 +10,7 @@ declare(strict_types=1);
 namespace SprykerSdkTests\Adapter;
 
 use PHPUnit\Framework\TestCase;
-use SprykerSdk\SprykerFeatureRemover\Adapter\RmDirAdapter;
+use SprykerSdk\SprykerFeatureRemover\Adapter\RmModuleDirAdapter;
 
 class RmDirAdapterTest extends TestCase
 {
@@ -53,18 +53,18 @@ class RmDirAdapterTest extends TestCase
     public function testRemoveModuleDirectoryFromProjectRemovesModuleFromAllLayers(): void
     {
         // Assert
-        foreach (RmDirAdapter::APP_LAYERS as $appLayer) {
+        foreach (RmModuleDirAdapter::APP_LAYERS as $appLayer) {
             mkdir($this->makeModulePathInProject($appLayer), 0755, true);
         }
 
-        $adapter = new RmDirAdapter(self::PROJECT_NAMESPACE);
+        $adapter = new RmModuleDirAdapter(self::PROJECT_NAMESPACE);
 
         // Act
         $isOk = $adapter->removeModuleDirectoryFromProjectSrc(self::MODULE_NAME);
 
         // Arrange
         $this->assertTrue($isOk);
-        foreach (RmDirAdapter::APP_LAYERS as $appLayer) {
+        foreach (RmModuleDirAdapter::APP_LAYERS as $appLayer) {
             $this->assertFalse(
                 file_exists($this->makeModulePathInProject($appLayer)),
                 'Folder ' . $this->makeModulePathInProject($appLayer) . ' must be removed.',
@@ -86,7 +86,7 @@ class RmDirAdapterTest extends TestCase
     {
         // Assert
         mkdir('src/Orm/Zed/' . self::MODULE_NAME, 0755, true);
-        $adapter = new RmDirAdapter(self::PROJECT_NAMESPACE);
+        $adapter = new RmModuleDirAdapter(self::PROJECT_NAMESPACE);
 
         // Act
         $isOk = $adapter->removeModuleDirectoryFromProjectOrm(self::MODULE_NAME);

@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace SprykerSdk\SprykerFeatureRemover\Adapter;
 
-class RmDirAdapter
+class RmModuleDirAdapter
 {
     /**
      * @var array<string>
