@@ -60,7 +60,7 @@ class PackageRemover
              *  - related ORM data. Remove from src/Orm/*
              */
 
-            $this->dispatcher->dispatch(new PackageRemovedEvent($package, $isDryRun));
+            $this->dispatcher->dispatch(new PackageRemovedEvent($package, $isDryRun), PackageRemovedEvent::NAME);
         }
 
         return $resultDto;

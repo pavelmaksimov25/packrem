@@ -24,3 +24,4 @@ services:
     SprykerSdk\SprykerFeatureRemover\EventSubscriber\AfterPackageRemovedEventSubscriber:
         arguments:
             - !tagged_iterator action.post-remove
+        tags: [ kernel.event_subscriber ]

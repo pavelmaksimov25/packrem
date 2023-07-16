@@ -26,9 +26,7 @@ class AfterPackageRemovedEventSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            PackageRemovedEvent::NAME => [
-                ['processAfterModuleRemoved', 0],
-            ],
+            PackageRemovedEvent::NAME => 'processAfterModuleRemoved',
         ];
     }
 
